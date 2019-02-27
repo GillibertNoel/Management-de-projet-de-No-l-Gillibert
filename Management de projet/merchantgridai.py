@@ -5,6 +5,8 @@ def foncajustementpardefaut(valeur,perteougain):
         return valeur/2
     if perteougain>0:
         return valeur+1
+    
+#cette ia prends plus souvent un chemin s'il rapporte et moins souvent un chemin s'il ne rapporte pas
 class MerchantGridAI(MerchantBehaviour):
     def __init__(self,world,fonctionperteougain = foncajustementpardefaut) -> None:
         super().__init__()

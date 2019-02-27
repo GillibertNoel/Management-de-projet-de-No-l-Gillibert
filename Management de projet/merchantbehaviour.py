@@ -1,5 +1,5 @@
 
-class MerchantBehaviour(object):
+class MerchantBehaviour(object):#classe dont deriverons des comportements.
     def __init__(self) -> None:
         pass
     def choisirchemin(self,position):#doit renvoyer un triplet ville1,ville2,produit

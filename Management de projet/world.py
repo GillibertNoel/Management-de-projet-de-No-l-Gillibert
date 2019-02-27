@@ -34,14 +34,26 @@ class World(object):
             self.nbvilles=nbvillesconsistant
             self.nbproduits=nbproduitsconsistant
             self.productionsdesvilles=grille
+            self.quantitesproduits=[]
+            for y in range(0,self.nbvilles):
+                u=[]
+                for i in range(0,self.nbproduits):
+                    u=u.append(0.0)
+                self.quantitesproduits=self.quantitesproduits.append(u)
         else:
             self.productionsdesvilles = []
+            self.quantitesproduits=[]
             for y in range(0,nbvilles):
-                u=[]
+                u=[]#une liste des productions des preduits d'une ville
+                b=[]#une liste des quantité des preduits dans une ville
                 for i in range(0,nbproduits):
                     u=u.append(uniform(-fourchette,fourchette))
-                self.productionsdesvilles=self.productionsdesvilles.append()
+                    b=b.append(0.0)
+                self.productionsdesvilles=self.productionsdesvilles.append(u)
+                self.quantitesproduits=self.quantitesproduits.append(b)
             self.nbvilles = nbvilles
             self.nbproduits = nbproduits
     def passeruntour(self):
-        pass
+        for i in self.villes:
+            for y in range(0,self.nbproduits):
+                self.quantitesproduits[i][y]=self.productionsdesvilles[i][y]+self.quantitesproduits[i][y]
