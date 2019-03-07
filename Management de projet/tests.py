@@ -1,11 +1,9 @@
+# coding: utf-8
 from matplotlib.pyplot import bone
 
 #tests des marchands
+
 test1
-    creermarchand
-    verifier que decrementer argent décrémente de 1 l'argent du marchand
-    
-test2
     creerunmonde
     incrementerproduit(monde,ville1,produit)
     creermarchand
@@ -15,14 +13,14 @@ test2
     verifier que la quantité de produit a bien été décrémenté de 1 dans ville 1 et incrémenté de 1 dans ville 2
     vérifier que le marchand a changé de position
     
-test3
+test2
     creerunmonde
     creermarchand
     creercomportementmarchand
     associercomportementetmarchand
     verifier que l'association s'est bien passée.
     
-test4
+test3
     creerunmonde
     creermarchand
     positionnermarchand ville1
@@ -31,20 +29,20 @@ test4
     verifier que le monde n'a pas changé
     verifier que le marchand a changé de position
     
-test5
+test4
     creerunmonde
     creermarchand
     faireunvoyage(monde,ville1,ville2,produit)
     verifier que cela fait une erreur
     
-test6
+test5
     creerunmonde
     creermarchand
     positionnermarchand ailleurs que dans ville1
     faireunvoyage(monde,ville1,ville2,produit)
     verifier que cela fait une erreur
     
-test7
+test6
     creerunmonde
     creermarchand
     positionnermarchand dans ville1
@@ -52,7 +50,7 @@ test7
     verifier que cela fait une erreur(dans ce monde fictif ce genre de boursicotage est interdit)
     #plus tard les mondes pourraient avoir une option pour autoriser cette tactique
     
-test8:
+test7:
     creerunmarchand
     verifier qu'il à la bonne quantitée d'argent initial
     faireuntour
