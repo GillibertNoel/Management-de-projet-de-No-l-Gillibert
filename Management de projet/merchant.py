@@ -16,37 +16,36 @@ class Merchant(object):
     """si la transaction est valide renvoie le benefice(potentiellement 0) sinon renvoie false"""
     def effectuertransaction(self,world,chemin):
         #verifier que la ville de depart est la bonne et autres preconditions
+        self.argent=self.argent-1
         if self.ville != chemin[0]:
-            print("chemin invalide: mauvais depart")
+            raise CheminInvalide("chemin invalide: mauvais depart dans merchant.effectuertransaction")
             return False
         if world.nbvilles < self.ville:
-            print("la ville du marchand est hors de l'index")
+            raise VilleHorsLimites("la ville du marchand est hors de l'index du monde dans lequel l'on apelle merchant.effectuertransaction")
             return False
         if world.nbvilles < chemin[0]:
-            print("la ville de départ est hors de l'index")
+            raise VilleHorsLimites("la ville de départ est hors de l'index du monde dans lequel l'on apelle merchant.effectuertransaction")
             return False
         if world.nbvilles < chemin[1]:
-            print("la ville d'arriv�e est hors de l'index")
+            raise VilleHorsLimites("la ville d'arrivée est hors de l'index du monde dans lequel l'on apelle merchant.effectuertransaction")
             return False
         if self.ville<0 or chemin[0]<0 or chemin[1]<0:
-            print("index négatif pour une ville: c'est interdit")
+            raise VilleHorsLimites("index négatif pour une ville: c'est interdit erreur repérée dans merchant.effectuertransaction")
             return False
+        if chemin[0]==chemin[1]:
+            print("il est interdit de faire un chemin d'une ville a elle même")
         #verifier qu'il y a assez de produit a acheter
         cout=world.evaluercoutproduit(chemin[2],chemin[0])
+        self.associerville(chemin[1])#voyage
         if cout<self.argent:#verification que l'on a l'argent necessaire
             if world.prendreproduit(chemin[2],chemin[0]):#achat
                 self.argent=self.argent-cout#payement
-                self.associerville(chemin[1])#voyage
                 gain=world.evaluercoutproduit(chemin[2],chemin[1])#determiner le gain
-                self.argent=self.argent+gain-1#gagner l'argent
+                self.argent=self.argent + gain#gagner l'argent
                 world.donnerproduit(chemin[2],chemin[1])#changer la quantit� de produit
-                benefice = gain - cout#calcul du benefice
+                benefice = gain - cout - 1#calcul du benefice
                 return benefice
-        else:
-            print("trop pauvre")
-            
-        self.argent=self.argent-1
-        print("impossible de faire la transaction")
+        print("impossible de faire la transaction: trop pauvre ou n'a pas de produit a acheter")
         print(self.argent)
         return -1
     

@@ -18,7 +18,10 @@ class MerchantGridAI(MerchantBehaviour):
             for z in range(0,world.nbvilles):
                 w=[]
                 for i in range(0,world.nbproduits):
-                    w.append(1.0)
+                    if z==y:
+                        w.append(0.0)
+                    else:
+                        w.append(1.0)
                 u.append(w)
             self.grille.append(u)
     def echecoureussite(self,transaction,perteougain):#une valeur negative de perteougain indique une perte et une valeur positive indique un gain
