@@ -2,63 +2,116 @@
 from matplotlib.pyplot import bone
 
 #tests des marchands
+def merchanttest1():
+    mondetest = World(nbvilles = 2, nbproduits = 1, grille = [])
+    reussite=True
+    mondetest.donnerproduit(0,0)
+    marchandtest = Merchant()
+    ordepart=marchandtest.argent
+    marchandtest.associerville(0)
+    marchandtest.faireunvoyage(mondetest,0,1,0)
+    chaine="MTest1: "
+    if (ordepart-marchandtest.argent==8):
+        chaine=chaine+"la quantitÃ© d'argent gagnÃ©e est la bonne\n"
+    else:
+        chaine=chaine+"la quantitÃ© d'argent gagnÃ©e est la mauvaise\n"
+        reussite=False
+    if mondetest.grid[0][0]==0:#il faut 0 Produit 0 dans la ville 0
+        chaine=chaine+"il y a bien 0 produit 0 dans la ville 0\n"
+    else:
+        chaine=chaine+"il y a la mauvaise quantitÃ© de produit 0 dans la ville 0\n"
+        reussite=False
+    if mondetest.grid[1][0]==1:#il faut 1 Produit 0 dans la ville 1
+        chaine=chaine+"il y a bien 1 produit 0 dans la ville 1\n"
+    else:
+        chaine=chaine+"il y a la mauvaise quantitÃ© de produit 0 dans la ville 1\n"
+        reussite=False
+    if marchandtest.ville==1:#le marchand doit Ãªtre allÃ© dans la bonne ville
+        chaine=chaine+"le marchand a voyagÃ© dans la bonne ville\n"
+    else:
+        chaine=chaine+"le marchand n'a pas voyagÃ© dans la bonne ville\n"
+        reussite=False
+    return chaine,reussite
+    
+def merchanttest2():
+    mondetest = World(nbvilles = 1, nbproduits = 1, grille = [])
+    marchandtest = Merchant()
+    merchantgridai=MerchantGridAI(mondetest)
+    marchandtest.associercomportement(merchantgridai)
+    if marchandtest.comportement == merchantgridai:
+        return True
+    else:
+        return False
+    
+def merchanttest3():
+    mondetest = World(nbvilles = 2, nbproduits = 1, grille = [])
+    reussite=True
+    marchandtest = Merchant()
+    ordepart=marchandtest.argent
+    marchandtest.associerville(0)
+    marchandtest.faireunvoyage(mondetest,0,1,0)
+    chaine="MTest1: "
+    if (ordepart-marchandtest.argent==-1):
+        chaine=chaine+"la quantitÃ© d'argent gagnÃ©e est la bonne\n"
+    else:
+        chaine=chaine+"la quantitÃ© d'argent gagnÃ©e est la mauvaise\n"
+        reussite=False
+    if mondetest.grid[0][0]==0:#il faut 0 Produit 0 dans la ville 0
+        chaine=chaine+"il y a bien 0 produit 0 dans la ville 0\n"
+    else:
+        chaine=chaine+"il y a la mauvaise quantitÃ© de produit 0 dans la ville 0\n"
+        reussite=False
+    if mondetest.grid[1][0]==0:#il faut 1 Produit 0 dans la ville 1
+        chaine=chaine+"il y a bien 0 produit 0 dans la ville 1\n"
+    else:
+        chaine=chaine+"il y a la mauvaise quantitÃ© de produit 0 dans la ville 1\n"
+        reussite=False
+    if marchandtest.ville==1:#le marchand doit Ãªtre allÃ© dans la bonne ville
+        chaine=chaine+"le marchand a voyagÃ© dans la bonne ville\n"
+    else:
+        chaine=chaine+"le marchand n'a pas voyagÃ© dans la bonne ville\n"
+        reussite=False
+    return chaine,reussite
+    
+def merchanttest4():
+    mondetest = World(nbvilles = 2, nbproduits = 1, grille = [])
+    marchandtest = Merchant()
+    try:
+        marchandtest.faireunvoyage(mondetest,0,1,0)
+    except CheminInvalide:
+        return True
+    return False
 
-test1
-    creerunmonde
-    incrementerproduit(monde,ville1,produit)
-    creermarchand
-    positionnermarchand ville1
-    faireunvoyage(monde,ville1,ville2,produit)
-    verifier que l'argent gagné est le bon
-    verifier que la quantité de produit a bien été décrémenté de 1 dans ville 1 et incrémenté de 1 dans ville 2
-    vérifier que le marchand a changé de position
-    
-test2
-    creerunmonde
-    creermarchand
-    creercomportementmarchand
-    associercomportementetmarchand
-    verifier que l'association s'est bien passée.
-    
-test3
-    creerunmonde
-    creermarchand
-    positionnermarchand ville1
-    faireunvoyage(monde,ville1,ville2,produit)
-    verifier que l'argent gagné est le bon(0)
-    verifier que le monde n'a pas changé
-    verifier que le marchand a changé de position
-    
-test4
-    creerunmonde
-    creermarchand
-    faireunvoyage(monde,ville1,ville2,produit)
-    verifier que cela fait une erreur
-    
-test5
-    creerunmonde
-    creermarchand
-    positionnermarchand ailleurs que dans ville1
-    faireunvoyage(monde,ville1,ville2,produit)
-    verifier que cela fait une erreur
-    
-test6
-    creerunmonde
-    creermarchand
-    positionnermarchand dans ville1
-    faireunvoyage(monde,ville1,ville1,produit)
-    verifier que cela fait une erreur(dans ce monde fictif ce genre de boursicotage est interdit)
+def merchanttest5():
+    mondetest = World(nbvilles = 2, nbproduits = 1, grille = [])
+    marchandtest = Merchant()
+    marchandtest.associerville(1)
+    try:
+        marchandtest.faireunvoyage(mondetest,0,1,0)
+    except CheminInvalide:
+        return True
+    return False
+def merchanttest6():
+    mondetest = World(nbvilles = 2, nbproduits = 1, grille = [])
+    marchandtest = Merchant()
+    marchandtest.associerville(1)
+    try:
+        marchandtest.faireunvoyage(mondetest,0,0,0)
+    except CheminInvalide:
+        return True
+    return False
     #plus tard les mondes pourraient avoir une option pour autoriser cette tactique
-    
-test7:
-    creerunmarchand
-    verifier qu'il à la bonne quantitée d'argent initial
-    faireuntour
-    verifier qu'il a un d'argent de moins
+
 #test des mondes
-test1
-    creerunmonde
-    verifier que le nombre de villes est le bon
+def worldtest1():
+    mondetest = World(nbvilles = 4, nbproduits = 3, grille = [])
+    villes=0
+    for i in mondetest.grille:
+        villes=villes+1
+    if mondetest.nbvilles==villes and villes==4 :
+        return True
+    else:
+        return False
     
 test2
     creerunmonde
@@ -75,36 +128,36 @@ test4
 test5
     creerunmonde
     faireuntour
-    verifier que les productions ont été appliquées
+    verifier que les productions ont ï¿½tï¿½ appliquï¿½es
     faireuntour
-    verifier que les productions ont été appliquées(au cas ou incrementer 0 n'est pas pareil qu'incrementer une autre valeur)
+    verifier que les productions ont ï¿½tï¿½ appliquï¿½es(au cas ou incrementer 0 n'est pas pareil qu'incrementer une autre valeur)
     
 test6
     creerunmonde
-    comparer ce monde avec lui même.(doit être vrai)
+    comparer ce monde avec lui mï¿½me.(doit ï¿½tre vrai)
     
 test7
     creerunmondeprecis
     creerunmondeidentique
-    comparer ces deux mondes(doit être vrai)
+    comparer ces deux mondes(doit ï¿½tre vrai)
     
 test8
     creerunmonde
     creerunautremonde
-    comparer ces deux mondes(doit être faux)
+    comparer ces deux mondes(doit ï¿½tre faux)
     
 test9
     creerunmonde
     incrementerproduit ville
-    verifier quantité produit
-    decrementerproduit même ville
-    verifier quantité produit et retour(doit être true)
+    verifier quantitï¿½ produit
+    decrementerproduit mï¿½me ville
+    verifier quantitï¿½ produit et retour(doit ï¿½tre true)
     
 test10
     creerunmonde
     decrementerproduit ville
     verifier que cela renvoie false
-    verifier quantité produit(doit être la même qu'avant)
+    verifier quantitï¿½ produit(doit ï¿½tre la mï¿½me qu'avant)
 
 #test du comportement des marchands
 test1
@@ -118,27 +171,27 @@ test2
     creerunmonde
     creeruncomportementmarchand(monde)
     demander au comportement de choisir un chemin n fois
-    verifier que cela suit bien la distribution prévue
+    verifier que cela suit bien la distribution prï¿½vue
     
 test3
     creerunmonde
     creeruncomportementmarchand(monde)
     indiquer au comportement la reussite d'un chemin
     demander au comportement de choisir un chemin n fois
-    verifier que cela suit bien la distribution prévue
+    verifier que cela suit bien la distribution prï¿½vue
 
 test4
     creerunmonde
     creeruncomportementmarchand(monde)
     indiquer au comportement l'echec d'un chemin
     demander au comportement de choisir un chemin n fois
-    verifier que cela suit bien la distribution prévue
+    verifier que cela suit bien la distribution prï¿½vue
 
 test5
     creerunmonde
     creeruncomportementmarchand(monde)
-    verifier que l'on n'a pas changé le reste du monde.
+    verifier que l'on n'a pas changï¿½ le reste du monde.
 
-"""Tests aux limites: verifier si l'on à des exceptions quand l'on applique des fonctions 
+"""Tests aux limites: verifier si l'on ï¿½ des exceptions quand l'on applique des fonctions 
 avec des valeurs de ville ou de produit negatifs ou superieurs au nombre de villes ou de produits
 (suivant que c'est une valeur de ville ou de produit)"""

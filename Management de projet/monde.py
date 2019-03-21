@@ -8,7 +8,6 @@ def evalcout(nombreduproduit):
 class World(object):
     """Worlds are currently a set of cities producing varied products at rates chosen randomly at start"""
     def __init__(self, nbvilles = 0, nbproduits = 0, grille = [], fourchette = 0.5,evaluationdecout=evalcout) -> None:
-        self.villes = np.arange(0, nbvilles, 1)
         estunegrille = True
         bool = False
         self.evaluationdecout=evaluationdecout
@@ -62,7 +61,7 @@ class World(object):
             self.nbvilles = nbvilles
             self.nbproduits = nbproduits
     def passeruntour(self):
-        for i in self.villes:
+        for i in range(0,self.nbvilles):
             for y in range(0,self.nbproduits):
                 self.quantitesproduits[i][y]=self.productionsdesvilles[i][y]+self.quantitesproduits[i][y]
                 

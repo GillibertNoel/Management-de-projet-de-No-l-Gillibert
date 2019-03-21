@@ -44,7 +44,6 @@ class MerchantGridAI(MerchantBehaviour):
                 break
             destination = destination + 1
         # choix du produit
-        print(destination)
         z=uniform(0,y[destination])
         produitchoisit = 0
         for i in self.grille[position][destination]:
